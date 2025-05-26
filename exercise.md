@@ -13,7 +13,11 @@ digraph {
     rankdir = "LR";
     node [shape=box];
 
-    "     コンピュータリテラシー    " -> "   プログラミングI  ";
+    "    コンピュータリテラシー   "->"  プログラミングI  "->" プログラミングⅡ  ";
+    "    コンピュータリテラシー   "->"  プログラミング基礎Ⅰ   "
+    ; "基礎ゼミ"->"  プログラミング基礎Ⅰ   "->"   プログラミング基礎Ⅱ  ";
+    "  情報工学概論  "->"計算機工学"->"論理回路";
+    "  情報工学概論  "->"  プログラミング基礎Ⅰ   ";
 }
 ```
 
@@ -27,6 +31,25 @@ digraph {
 @startwbs ex02
 * 拓殖大学
 ** 商学部
+*** 経営学科
+*** 国際ビジネス学科
+*** 会計学科
+** 政経学科
+*** 法律政治学科
+*** 経済学科
+*** 社会安全学科
+** 外国語学科
+*** 英米語学科
+*** 中国語学科
+*** スペイン語学科
+*** 国際日本語学科
+** 工学部
+*** 機械システム学科
+*** 電子システム学科
+*** 情報工学科
+*** デザイン学科
+** 国際学部
+*** 国際学科
 @endwbs
 ```
 
@@ -39,11 +62,26 @@ digraph {
 ```plantUML
 @startuml ex03
 left to right direction
-actor 学生 as student
-rectangle {
-    usecase "課題の受領" as uc2
+actor "学生" as student
+actor "教員" as faculty
+rectangle  {
+usecase "提出結果の採点" as setgrd
+usecase "リモートリポジトリにpush" as regist
+usecase "修正のコミット" as c
+usecase "修正をステージに上げる" as b
+usecase "課題ファイルの修正" as a
+usecase "リポジトリのクローン" as chktbl
+usecase "課題の受領" as chkgrd
+usecase "課題の登録" as getlist
 }
-student --> uc2
+student --> a
+student --> chkgrd
+student --> b
+student --> c
+student --> regist
+getlist <-- faculty
+student --> chktbl
+setgrd <-- faculty
 @enduml
 ```
 
@@ -53,12 +91,25 @@ student --> uc2
 独自の図解を作成せよ．対象は自由に決めてよいが，
 誰かのコピーにならないように留意せよ．
 
-```
+```plantUML
+@startuml ex04
+left to right direction
+actor "利用者" as user
+actor "販売者" as seller
+rectangle 販売システム {
+usecase "商品を購入する" as a
+usecase "商品を登録する" as b
+usecase "売上を集計・閲覧する" as c
+}
+user --> a
+seller --> b
+seller --> c
+@enduml
 ```
 
 
 ## チェック
-- [ ] 課題 3.1 有向グラフ
-- [ ] 課題 3.2 WBS
-- [ ] 課題 3.3 ユースケース図
-- [ ] 課題 3.4 オリジナルの図解
+- [x] 課題 3.1 有向グラフ
+- [x] 課題 3.2 WBS
+- [x] 課題 3.3 ユースケース図
+- [x] 課題 3.4 オリジナルの図解 -->
